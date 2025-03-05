@@ -3259,6 +3259,7 @@
                     <option value="Sudah Digunakan" ${storedStatus[item.code]?.status === 'Sudah Digunakan' ? 'selected' : ''}>Sudah Digunakan</option>
                 `;
                 statusSelect.addEventListener('change', () => {
+                    const previousStatus = storedStatus[item.code]?.status || 'Belum Digunakan'; // Simpan status sebelumnya
                     Swal.fire({
                         title: 'Masukkan Password Admin',
                         input: 'password',
@@ -3276,7 +3277,7 @@
                         } else if (result.isConfirmed) {
                             Swal.fire('Gagal!', 'Password salah.', 'error');
                             // Reset the select to previous value
-                            statusSelect.value = storedStatus[item.code]?.status || 'Belum Digunakan';
+                            statusSelect.value = previousStatus; // Kembalikan ke status sebelumnya
                         }
                     });
                 });
@@ -3309,6 +3310,7 @@
                     <option value="Sudah Digunakan" ${storedStatus[item.code]?.status === 'Sudah Digunakan' ? 'selected' : ''}>Sudah Digunakan</option>
                 `;
                 statusSelect.addEventListener('change', () => {
+                    const previousStatus = storedStatus[item.code]?.status || 'Belum Digunakan'; // Simpan status sebelumnya
                     Swal.fire({
                         title: 'Masukkan Password Admin',
                         input: 'password',
@@ -3326,7 +3328,7 @@
                         } else if (result.isConfirmed) {
                             Swal.fire('Gagal!', 'Password salah.', 'error');
                             // Reset the select to previous value
-                            statusSelect.value = storedStatus[item.code]?.status || 'Belum Digunakan';
+                            statusSelect.value = previousStatus; // Kembalikan ke status sebelumnya
                         }
                     });
                 });
