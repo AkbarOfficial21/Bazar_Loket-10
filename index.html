@@ -3260,6 +3260,7 @@
                 `;
                 statusSelect.addEventListener('change', () => {
                     const previousStatus = storedStatus[item.code]?.status || 'Belum Digunakan'; // Simpan status sebelumnya
+                    const previousTimestamp = storedStatus[item.code]?.timestamp || 'N/A'; // Simpan timestamp sebelumnya
                     Swal.fire({
                         title: 'Masukkan Password Admin',
                         input: 'password',
@@ -3271,13 +3272,21 @@
                             const newStatus = statusSelect.value;
                             statusCell.className = newStatus === 'Sudah Digunakan' ? 'status-sudah' : 'status-belum';
 
-                            storedStatus[item.code] = { status: newStatus, timestamp: storedStatus[item.code]?.timestamp || 'N/A' };
+                            if (newStatus === 'Sudah Digunakan') {
+                                const timestamp = new Date().toLocaleString(); // Ambil timestamp saat ini
+                                storedStatus[item.code] = { status: newStatus, timestamp: timestamp };
+                            } else {
+                                storedStatus[item.code] = { status: newStatus, timestamp: 'N/A' }; // Kosongkan timestamp
+                            }
+
                             localStorage.setItem('kuponStatus', JSON.stringify(storedStatus));
+                            timestampCell.textContent = storedStatus[item.code].timestamp; // Update timestamp di tabel
                             Swal.fire('Berhasil!', 'Status kupon telah diubah.', 'success');
                         } else if (result.isConfirmed) {
                             Swal.fire('Gagal!', 'Password salah.', 'error');
                             // Reset the select to previous value
                             statusSelect.value = previousStatus; // Kembalikan ke status sebelumnya
+                            timestampCell.textContent = previousTimestamp; // Kembalikan ke timestamp sebelumnya
                         }
                     });
                 });
@@ -3311,6 +3320,7 @@
                 `;
                 statusSelect.addEventListener('change', () => {
                     const previousStatus = storedStatus[item.code]?.status || 'Belum Digunakan'; // Simpan status sebelumnya
+                    const previousTimestamp = storedStatus[item.code]?.timestamp || 'N/A'; // Simpan timestamp sebelumnya
                     Swal.fire({
                         title: 'Masukkan Password Admin',
                         input: 'password',
@@ -3322,13 +3332,21 @@
                             const newStatus = statusSelect.value;
                             statusCell.className = newStatus === 'Sudah Digunakan' ? 'status-sudah' : 'status-belum';
 
-                            storedStatus[item.code] = { status: newStatus, timestamp: storedStatus[item.code]?.timestamp || 'N/A' };
+                            if (newStatus === 'Sudah Digunakan') {
+                                const timestamp = new Date().toLocaleString(); // Ambil timestamp saat ini
+                                storedStatus[item.code] = { status: newStatus, timestamp: timestamp };
+                            } else {
+                                storedStatus[item.code] = { status: newStatus, timestamp: 'N/A' }; // Kosongkan timestamp
+                            }
+
                             localStorage.setItem('kuponStatus', JSON.stringify(storedStatus));
+                            timestampCell.textContent = storedStatus[item.code].timestamp; // Update timestamp di tabel
                             Swal.fire('Berhasil!', 'Status kupon telah diubah.', 'success');
                         } else if (result.isConfirmed) {
                             Swal.fire('Gagal!', 'Password salah.', 'error');
                             // Reset the select to previous value
                             statusSelect.value = previousStatus; // Kembalikan ke status sebelumnya
+                            timestampCell.textContent = previousTimestamp; // Kembalikan ke timestamp sebelumnya
                         }
                     });
                 });
